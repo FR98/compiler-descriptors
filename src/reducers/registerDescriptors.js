@@ -1,31 +1,35 @@
 import { combineReducers } from 'redux';
 
 export const types = {
-    R1_SETTED: 'R1_SETTED',
+    LOAD: 'LOAD',
 }
 
 export const actions = {
-    setR1: value => ({
-        type: types.R1_SETTED,
-        payload: value,
+    LD: (R, address) => ({
+        type: types.LOAD,
+        payload: {
+            R,
+            address,
+        },
     }),
 }
 
 // Reducers
 
-const R1 = (state = null, action) => {
+const registers = (state = {}, action) => {
     switch(action.type) {
-        case types.R1_SETTED: return action.payload;
+        case types.LOAD:
+            state[action.payload.R] = action.payload.address
+            return state
         default: return state;
     }
 };
 
-
 export default combineReducers({
-    R1,
+    registers,
 });
 
 
 export const selectors = {
-    getR1: state => state.R1,
+    getR1: state => state.registers['R1'],
 }
