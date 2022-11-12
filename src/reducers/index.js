@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import registerDescriptors, * as registerDescriptorsSelectors from './registerDescriptors';
+import descriptors, * as descriptorsSelectors from './descriptors';
 
 export default combineReducers({
-    registerDescriptors,
+    descriptors,
 });

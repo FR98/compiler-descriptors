@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import * as registerDescriptor from './reducers/registerDescriptors'
+import * as descriptors from './reducers/descriptors'
 
 function App({
     start
@@ -28,20 +28,40 @@ export default connect(
     state => ({}),
     dispatch => ({
         start() {
+            const init_registers = {
+                R1: null,
+                R2: null,
+                R3: null,
+            }
+
+            const init_addresses = {
+                a: 'a',
+                b: 'b',
+                c: 'c',
+                d: 'd',
+                t: null,
+                u: null,
+                v: null,
+            }
+
+            dispatch(descriptors.actions.INIT(init_registers, init_addresses))
+
             // t = a - b
-            dispatch(registerDescriptor.actions.LD('R1', 'a'))
-            dispatch(registerDescriptor.actions.LD('R2', 'b'))
-            dispatch(registerDescriptor.actions.SUB('R2', 'R1', 'R2', 't'))
+            dispatch(descriptors.actions.LD('R1', 'a'))
+            dispatch(descriptors.actions.LD('R2', 'b'))
+            dispatch(descriptors.actions.SUB('R2', 'R1', 'R2', 't'))
             // u = a - c
-            dispatch(registerDescriptor.actions.LD('R3', 'c'))
-            dispatch(registerDescriptor.actions.SUB('R1', 'R1', 'R3', 'u'))
+            dispatch(descriptors.actions.LD('R3', 'c'))
+            dispatch(descriptors.actions.SUB('R1', 'R1', 'R3', 'u'))
             // v = t + u
-            dispatch(registerDescriptor.actions.ADD('R3', 'R2', 'R1', 'v'))
+            dispatch(descriptors.actions.ADD('R3', 'R2', 'R1', 'v'))
             // a = d
-            dispatch(registerDescriptor.actions.LD('R2', 'd'))
+            dispatch(descriptors.actions.LD('R2', 'd', 'a'))
             // d = v + U
-            dispatch(registerDescriptor.actions.ADD('R1', 'R3', 'R1', 'd'))
+            dispatch(descriptors.actions.ADD('R1', 'R3', 'R1', 'd'))
             // Salida
+            dispatch(descriptors.actions.ST('a', 'R2'))
+            dispatch(descriptors.actions.ST('d', 'R1'))
         },
     })
 )(App);
