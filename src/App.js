@@ -14,10 +14,30 @@ function App({
                 <button onClick={ start }>Iniciar simulacion</button>
                 <ul>
                     <li>t = a - b</li>
+                        <ul>
+                            <li>LD R1, a</li>
+                            <li>LD R2, b</li>
+                            <li>SUB R2, R1, R2</li>
+                        </ul>
                     <li>u = a - c</li>
+                        <ul>
+                            <li>LD R3, c</li>
+                            <li>SUB R1, R1, R3</li>
+                        </ul>
                     <li>v = t + u</li>
+                        <ul>
+                            <li>ADD R3, R2, R1</li>
+                        </ul>
                     <li>a = d</li>
+                        <ul>
+                            <li>LD R2, d</li>
+                        </ul>
                     <li>d = v + U</li>
+                        <ul>
+                            <li>ADD R1, R3, R1</li>
+                            <li>ST a, R2</li>
+                            <li>ST d, R1</li>
+                        </ul>
                 </ul>
             </header>
         </div>
